@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mùa Đông Việt Nam - Bí Mật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0984e3 0%, #2d3436 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 4em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header p {
+            font-size: 1.5em;
+            opacity: 0.95;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: #0984e3;
+            transform: translateY(-3px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .content-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .content-card h2 {
+            color: #0984e3;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-card p {
+            color: #374151;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .card-large {
+            grid-column: span 2;
+        }
+
+        .card-tall {
+            grid-row: span 2;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent 0%, rgba(9, 132, 227, 0.3) 100%);
+            pointer-events: none;
+        }
+
+        .festival-tag {
+            display: inline-block;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #0984e3 0%, #2d3436 100%);
+            color: white;
+            border-radius: 20px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.95em;
+            font-weight: bold;
+        }
+
+        .emotion-box {
+            background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2d3436;
+            margin-top: 15px;
+        }
+
+        /* Poem Section */
+        .poem-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .poem-section h2 {
+            color: #0984e3;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .poem-content {
+            font-family: 'Georgia', serif;
+            font-size: 1.4em;
+            line-height: 2.2;
+            color: #374151;
+            font-style: italic;
+        }
+
+        .poem-content p {
+            margin: 15px 0;
+        }
+
+        .canvas-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .canvas-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .canvas-header h2 {
+            font-size: 2.5em;
+            color: #0984e3;
+            margin-bottom: 10px;
+        }
+
+        #drawingCanvas {
+            width: 100%;
+            height: 500px;
+            border: 4px solid #0984e3;
+            border-radius: 15px;
+            cursor: crosshair;
+            background: #f8fafc;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-winter {
+            background: linear-gradient(135deg, #0984e3 0%, #2d3436 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+
+        #aiResponse {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%);
+            border-radius: 15px;
+            border-left: 6px solid #0984e3;
+            display: none;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        #aiResponse h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        #aiResponse p {
+            color: #636e72;
+            line-height: 1.8;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(45, 52, 54, 0.3);
+            border-radius: 50%;
+            border-top-color: #2d3436;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .winter-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .winter-particle {
+            position: absolute;
+            font-size: 2em;
+            animation: winterFloat 8s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes winterFloat {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translateY(-80px) translateX(30px) rotate(90deg);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-150px) translateX(-20px) rotate(180deg);
+                opacity: 0.6;
+            }
+            75% {
+                transform: translateY(-80px) translateX(40px) rotate(270deg);
+                opacity: 0.3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-large, .card-tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            #drawingCanvas {
+                height: 350px;
+            }
+
+            .poem-section {
+                padding: 25px;
+            }
+
+            .poem-content {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="winter-particles" id="winterParticles"></div>
+
+    <div class="header">
+        <h1>❄️ MÙA ĐÔNG VIỆT NAM ❄️</h1>
+        <p>Mùa của gió lạnh, bếp lửa và kỷ niệm</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+    </div>
+
+    <div class="container">
+        <!-- Poem Section -->
+        <div class="poem-section">
+            <h2><i class="fas fa-feather-alt"></i> Thơ Đông</h2>
+            <div class="poem-content">
+                <p>Gió mùa đông bắc se lạnh</p>
+                <p>Bếp lửa hồng sưởi ấm tay</p>
+                <p>Đông vĩnh cửu là ký ức</p>
+                <p>Đóng băng thờii gian yêu thương</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card card-large">
+                <img src="https://images.unsplash.com/photo-1483664852095-d6cc687070ef?w=800&q=80" alt="Mùa đông" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>🌡️ Thờii tiết & Khí hậu</h2>
+                    <p>Mùa đông miền Bắc Việt Nam lạnh với nhiệt độ dao động từ 10-20°C, có khi xuống dưới 10°C. Gió mùa đông bắc se lạnh thổi về. Miền Nam vẫn ấm áp với nhiệt độ 25-30°C. Sương muối có thể xuất hiện ở vùng núi cao. Đây là mùa khô, ít mưa.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <img src="https://images.unsplash.com/photo-1516714819001-8ee7a13b71d7?w=800&q=80" alt="Cảnh đông" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>🌳 Cảnh quan</h2>
+                    <p>Cây cối trụi lá, cành khẳng khiu. Sương mù dày đặc buổi sáng sớm. Bếp lửa hồng ấm áp trong nhà. Hoa đào nở sớm báo xuân sắp về.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <img src="https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=800&q=80" alt="Áo ấm mùa đông" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>👘 Trang phục</h2>
+                    <p>Áo khoác dày, áo len ấm áp. Khăn quàng cổ, găng tay, mũ len. Quần jeans, quần dày. Giày boots chống lạnh. Màu sắc tối như đen, xám, nâu.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-tall">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" alt="Lễ hội mùa đông" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>🎊 Lễ hội & Hoạt động</h2>
+                    <p>
+                        <span class="festival-tag">Tết Dương Lịch</span>
+                        <span class="festival-tag">Lễ Giáng Sinh</span>
+                        <span class="festival-tag">Tết Nguyên Đán</span>
+                        <span class="festival-tag">Ngồi bếp lửa</span>
+                    </p>
+                    <p>Quây quần bên bếp lửa hồng. Nướng khoai, nướng ngô. Đi chợ Tết sắm sửa. Thăm họ hàng, bạn bè. Ngồi uống trà, café nóng. Xem phim, đọc sách trong nhà ấm áp.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80" alt="Ẩm thực mùa đông" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>🍜 Ẩm thực</h2>
+                    <p>Lẩu nóng các loại: lẩu Thái, lẩu riêu cua. Phở, bún thang nóng hổi. Bánh chưng, giò chả ngày Tết. Trà nóng, café sữa nóng. Khoai lang, ngô nướng bếp lửa.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-large">
+                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80" alt="Cảm xúc mùa đông" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>💝 Cảm xúc cá nhân</h2>
+                    <div class="emotion-box">
+                        ❄️ Se lạnh nhưng ấm áp<br>
+                        🔥 Gắn kết gia đình<br>
+                        🎊 Háo hức chờ Tết<br>
+                        💭 Hoàii niệm, suy tư<br>
+                        🏠 Yêu thương mái ấm
+                    </div>
+                    <p style="margin-top: 15px;">Mùa đông mang đến cảm giác se lạnh nhưng cũng ấm áp khi quây quần bên gia đình. Bếp lửa hồng, những câu chuyện rôm rả tạo nên kỷ niệm khó quên. Không khí chuẩn bị đón Tết khiến mọi ngườii háo hức, vui vẻ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Section -->
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h2>🎨 Vẽ Mùa Đông Củaa Bạn</h2>
+                <p style="color: #6b7280; font-size: 1.1em;">Sáng tạo bức tranh mùa đông của riêng bạn</p>
+            </div>
+            
+            <canvas id="drawingCanvas"></canvas>
+            
+            <div class="controls">
+                <button class="btn btn-winter" onclick="drawWinterAI()">❄️ AI Vẽ Mùa Đông</button>
+                <button class="btn btn-winter" onclick="drawSnow()">🌨️ Vẽ Tuyết Rơi</button>
+                <button class="btn btn-winter" onclick="drawFireplace()">🔥 Vẽ Bếp Lửa</button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()">🤖 AI Phân Tích</button>
+                <button class="btn btn-danger" onclick="clearCanvas()">🗑️ Xóa</button>
+            </div>
+            
+            <div id="aiResponse"></div>
+        </div>
+    </div>
+
+    <script>
+        // Winter particles animation
+        const winterParticles = document.getElementById('winterParticles');
+        const icons = ['❄️', '☃️', '🔥', '🧣', '🧤', '🎄'];
+        
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'winter-particle';
+            particle.textContent = icons[Math.floor(Math.random() * icons.length)];
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = Math.random() * 5 + 5 + 's';
+            winterParticles.appendChild(particle);
+        }
+
+        // Canvas setup
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            ctx.strokeStyle = '#0984e3';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mouseout', () => isDrawing = false);
+
+        // Touch events
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            isDrawing = true;
+            [lastX, lastY] = [touch.clientX - rect.left, touch.clientY - rect.top];
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (!isDrawing) return;
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            ctx.strokeStyle = '#0984e3';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+            ctx.stroke();
+            [lastX, lastY] = [touch.clientX - rect.left, touch.clientY - rect.top];
+        });
+
+        canvas.addEventListener('touchend', () => isDrawing = false);
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('aiResponse').style.display = 'none';
+        }
+
+        function drawSnow() {
+            // Dark sky
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            skyGradient.addColorStop(0, '#2d3436');
+            skyGradient.addColorStop(1, '#636e72');
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Snowflakes
+            for (let i = 0; i < 100; i++) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const size = Math.random() * 4 + 2;
+                
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Ground
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
+        }
+
+        function drawFireplace() {
+            // Background
+            ctx.fillStyle = '#2d3436';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Fireplace
+            const fpX = canvas.width/2 - 100;
+            const fpY = canvas.height/2;
+            
+            ctx.fillStyle = '#636e72';
+            ctx.fillRect(fpX, fpY, 200, 150);
+            
+            // Fire
+            const fireColors = ['#ff4757', '#ff6348', '#ffa502', '#ffc312'];
+            for(let i = 0; i < 30; i++) {
+                ctx.fillStyle = fireColors[Math.floor(Math.random() * fireColors.length)];
+                const fx = fpX + 50 + Math.random() * 100;
+                const fy = fpY + 100 - Math.random() * 80;
+                const size = Math.random() * 15 + 5;
+                
+                ctx.beginPath();
+                ctx.moveTo(fx, fy);
+                ctx.lineTo(fx - size/2, fy + size);
+                ctx.lineTo(fx + size/2, fy + size);
+                ctx.fill();
+            }
+            
+            // Logs
+            ctx.strokeStyle = '#8b4513';
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+            ctx.moveTo(fpX + 60, fpY + 130);
+            ctx.lineTo(fpX + 140, fpY + 130);
+            ctx.stroke();
+        }
+
+        async function drawWinterAI() {
+            const aiResponse = document.getElementById('aiResponse');
+            aiResponse.style.display = 'block';
+            aiResponse.innerHTML = '<h3>❄️ Đang vẽ mùa đông Việt Nam...</h3>';
+
+            drawSnow();
+            setTimeout(() => drawFireplace(), 500);
+
+            aiResponse.innerHTML = `
+                <h3>🎨 Mùa Đông Đã Được Vẽ!</h3>
+                <p>Bức tranh mùa đông với tuyết rơi và bếp lửa hồng ấm áp đã được tạo ra. 
+                Bạn có thể thêm các chi tiết như ngườii quây quần, cốc trà nóng, hay cây thông Noel để bức tranh thêm sinh động!</p>
+            `;
+        }
+
+        async function analyzeDrawing() {
+            const aiResponse = document.getElementById('aiResponse');
+            aiResponse.style.display = 'block';
+            aiResponse.innerHTML = '<h3>🤖 Đang phân tích bức vẽ...</h3>';
+
+            aiResponse.innerHTML = `
+                <h3>🎨 Phân Tích Bức Vẽ Mùa Đông</h3>
+                <p>Bức vẽ của bạn thể hiện vẻ đẹp ấm áp của mùa đông Việt Nam với những gam màu tương phản. 
+                Các yếu tố như tuyết trắng, bếp lửa đỏ tạo nên không khí vừa se lạnh vừa ấm cúng. 
+                Hãy tiếp tục phát huy sự sáng tạo của bạn!</p>
+            `;
+        }
+    </script>
+</body>
+</html>

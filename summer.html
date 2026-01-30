@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mùa Hạ Việt Nam - Bí Mật</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 4em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header p {
+            font-size: 1.5em;
+            opacity: 0.95;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: #e17055;
+            transform: translateY(-3px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .content-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .content-card h2 {
+            color: #e17055;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-card p {
+            color: #374151;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .card-large {
+            grid-column: span 2;
+        }
+
+        .card-tall {
+            grid-row: span 2;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent 0%, rgba(225, 112, 85, 0.3) 100%);
+            pointer-events: none;
+        }
+
+        .festival-tag {
+            display: inline-block;
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+            color: white;
+            border-radius: 20px;
+            margin: 5px 5px 5px 0;
+            font-size: 0.95em;
+            font-weight: bold;
+        }
+
+        .emotion-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #c0392b;
+            margin-top: 15px;
+        }
+
+        /* Poem Section */
+        .poem-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .poem-section h2 {
+            color: #e17055;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .poem-content {
+            font-family: 'Georgia', serif;
+            font-size: 1.4em;
+            line-height: 2.2;
+            color: #374151;
+            font-style: italic;
+        }
+
+        .poem-content p {
+            margin: 15px 0;
+        }
+
+        .canvas-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .canvas-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .canvas-header h2 {
+            font-size: 2.5em;
+            color: #e17055;
+            margin-bottom: 10px;
+        }
+
+        #drawingCanvas {
+            width: 100%;
+            height: 500px;
+            border: 4px solid #e17055;
+            border-radius: 15px;
+            cursor: crosshair;
+            background: #f8fafc;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-summer {
+            background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+
+        #aiResponse {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 15px;
+            border-left: 6px solid #e17055;
+            display: none;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        #aiResponse h3 {
+            color: #c0392b;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        #aiResponse p {
+            color: #78350f;
+            line-height: 1.8;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(192, 57, 43, 0.3);
+            border-radius: 50%;
+            border-top-color: #c0392b;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .summer-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .summer-particle {
+            position: absolute;
+            font-size: 2em;
+            animation: summerFloat 8s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes summerFloat {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translateY(-80px) translateX(30px) rotate(90deg);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-150px) translateX(-20px) rotate(180deg);
+                opacity: 0.6;
+            }
+            75% {
+                transform: translateY(-80px) translateX(40px) rotate(270deg);
+                opacity: 0.3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-large, .card-tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            #drawingCanvas {
+                height: 350px;
+            }
+
+            .poem-section {
+                padding: 25px;
+            }
+
+            .poem-content {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="summer-particles" id="summerParticles"></div>
+
+    <div class="header">
+        <h1>☀️ MÙA HẠ VIỆT NAM ☀️</h1>
+        <p>Mùa của nắng gắt, biển xanh và những đêm sao</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Quay lại trang chủ</a>
+    </div>
+
+    <div class="container">
+        <!-- Poem Section -->
+        <div class="poem-section">
+            <h2><i class="fas fa-feather-alt"></i> Thơ Hạ</h2>
+            <div class="poem-content">
+                <p>Phượng vĩ đỏ rực góc trờii</p>
+                <p>Tiếng ve ngân vang gọi hè về</p>
+                <p>Đêm hạ sao trờii lấp lánh</p>
+                <p>Thì thầm bí mật tình yêu</p>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="content-card card-large">
+                <img src="https://images.unsplash.com/photo-1504194921103-98a190533f81?w=800&q=80" alt="Biển mùa hè" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>🌡️ Thờii tiết & Khí hậu</h2>
+                    <p>Mùa hạ Việt Nam nóng ẩm với nhiệt độ dao động từ 30-38°C. Nắng gắt chiếu suốt cả ngày, độ ẩm cao khiến không khí oi bức. Thường có mưa rào chiều tối, giải nhiệt sau một ngày nóng bức. Biển xanh và những bãi biển tuyệt đẹp là điểm đến lý tưởng để tránh nóng.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <img src="https://images.unsplash.com/photo-1559592413-7cec4d0ea49b?w=800&q=80" alt="Phượng vĩ" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>🌳 Cảnh quan</h2>
+                    <p>Phượng vĩ đỏ rực khắp phố phường. Cánh đồng lúa chín vàng óng. Biển xanh ngắt với những bãi cát trắng mịn. Tiếng ve sầu ngân vang báo hiệu mùa hè.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Áo dài mùa hè" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>👘 Trang phục</h2>
+                    <p>Áo dài voan mỏng, nhẹ nhàng. Quần áo cotton thoáng mát, thấm hút mồ hôi. Màu sắc tươi sáng như trắng, xanh biển, vàng nhạt. Đồ bơi và trang phục đi biển.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-tall">
+                <img src="https://images.unsplash.com/photo-1532347922424-cba175ba7cb8?w=800&q=80" alt="Lễ hội mùa hè" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>🎊 Lễ hội & Hoạt động</h2>
+                    <p>
+                        <span class="festival-tag">Tết Đoan Ngọ</span>
+                        <span class="festival-tag">Lễ hội biển</span>
+                        <span class="festival-tag">Du lịch hè</span>
+                        <span class="festival-tag">Cắm trại</span>
+                    </p>
+                    <p>Đi biển tắm nắng, bơi lội giải nhiệt. Cắm trại qua đêm dưới sao trờii. Tham gia các lễ hội biển sôi động. Ăn trái cây mùa hè như vải, nhãn, măng cụt. Thưởng thức kem và đồ uống mát lạnh.</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=800&q=80" alt="Ẩm thực mùa hè" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>🍜 Ẩm thực</h2>
+                    <p>Chè đủ loại: chè bưởi, chè khúc bạch, chè thái. Trái cây mùa hè: vải, nhãn, mít, dưa hấu. Bún chả, bún đậu mắm tôm. Nước mía, nước dừa tươi mát.</p>
+                </div>
+            </div>
+
+            <div class="content-card card-large">
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80" alt="Cảm xúc mùa hè" class="card-image">
+                <div class="image-overlay"></div>
+                <div class="card-content">
+                    <h2>💝 Cảm xúc cá nhân</h2>
+                    <div class="emotion-box">
+                        ☀️ Nóng bức nhưng vui vẻ<br>
+                        🌊 Thích thú với biển xanh<br>
+                        🏖️ Thư giãn, nghỉ ngơi<br>
+                        🌙 Lãng mạn đêm hè<br>
+                        🍉 Mát mẻ với trái cây
+                    </div>
+                    <p style="margin-top: 15px;">Mùa hạ mang đến cảm giác nóng bức nhưng cũng đầy niềm vui. Những chuyến đi biển, những đêm cắm trại dưới sao trờii tạo nên kỷ niệm khó quên. Hương vị trái cây mùa hè và những ly nước mát lành là điều tuyệt vờii nhất.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas Section -->
+        <div class="canvas-section">
+            <div class="canvas-header">
+                <h2>🎨 Vẽ Mùa Hạ Củaa Bạn</h2>
+                <p style="color: #6b7280; font-size: 1.1em;">Sáng tạo bức tranh mùa hè của riêng bạn</p>
+            </div>
+            
+            <canvas id="drawingCanvas"></canvas>
+            
+            <div class="controls">
+                <button class="btn btn-summer" onclick="drawSummerAI()">☀️ AI Vẽ Mùa Hạ</button>
+                <button class="btn btn-summer" onclick="drawSunset()">🌅 Vẽ Hoàng Hôn</button>
+                <button class="btn btn-summer" onclick="drawBeach()">🏖️ Vẽ Biển</button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()">🤖 AI Phân Tích</button>
+                <button class="btn btn-danger" onclick="clearCanvas()">🗑️ Xóa</button>
+            </div>
+            
+            <div id="aiResponse"></div>
+        </div>
+    </div>
+
+    <script>
+        // Summer particles animation
+        const summerParticles = document.getElementById('summerParticles');
+        const icons = ['☀️', '🌊', '🏖️', '🌅', '🍉', '🌺'];
+        
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'summer-particle';
+            particle.textContent = icons[Math.floor(Math.random() * icons.length)];
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = Math.random() * 5 + 5 + 's';
+            summerParticles.appendChild(particle);
+        }
+
+        // Canvas setup
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            ctx.strokeStyle = '#e17055';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mouseout', () => isDrawing = false);
+
+        // Touch events
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            isDrawing = true;
+            [lastX, lastY] = [touch.clientX - rect.left, touch.clientY - rect.top];
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (!isDrawing) return;
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            ctx.strokeStyle = '#e17055';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+            ctx.stroke();
+            [lastX, lastY] = [touch.clientX - rect.left, touch.clientY - rect.top];
+        });
+
+        canvas.addEventListener('touchend', () => isDrawing = false);
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('aiResponse').style.display = 'none';
+        }
+
+        function drawSunset() {
+            // Sky gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height/2);
+            gradient.addColorStop(0, '#ff6b6b');
+            gradient.addColorStop(0.5, '#feca57');
+            gradient.addColorStop(1, '#ff9ff3');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height/2);
+            
+            // Sun
+            ctx.fillStyle = '#ff4757';
+            ctx.beginPath();
+            ctx.arc(canvas.width/2, canvas.height/2 - 50, 60, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Sea
+            const seaGradient = ctx.createLinearGradient(0, canvas.height/2, 0, canvas.height);
+            seaGradient.addColorStop(0, '#3742fa');
+            seaGradient.addColorStop(1, '#2f3542');
+            ctx.fillStyle = seaGradient;
+            ctx.fillRect(0, canvas.height/2, canvas.width, canvas.height/2);
+        }
+
+        function drawBeach() {
+            // Sky
+            ctx.fillStyle = '#74b9ff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height/2);
+            
+            // Sea
+            ctx.fillStyle = '#0984e3';
+            ctx.fillRect(0, canvas.height/2 - 50, canvas.width, 100);
+            
+            // Sand
+            ctx.fillStyle = '#fdcb6e';
+            ctx.fillRect(0, canvas.height/2 + 50, canvas.width, canvas.height/2 - 50);
+            
+            // Palm tree
+            ctx.strokeStyle = '#2d3436';
+            ctx.lineWidth = 8;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width - 100, canvas.height);
+            ctx.quadraticCurveTo(canvas.width - 80, canvas.height/2 + 100, canvas.width - 50, canvas.height/2);
+            ctx.stroke();
+            
+            // Palm leaves
+            ctx.strokeStyle = '#00b894';
+            ctx.lineWidth = 4;
+            for(let i = 0; i < 6; i++) {
+                ctx.beginPath();
+                ctx.moveTo(canvas.width - 50, canvas.height/2);
+                ctx.lineTo(
+                    canvas.width - 50 + Math.cos(i * 60 * Math.PI/180) * 80,
+                    canvas.height/2 + Math.sin(i * 60 * Math.PI/180) * 80
+                );
+                ctx.stroke();
+            }
+        }
+
+        async function drawSummerAI() {
+            const aiResponse = document.getElementById('aiResponse');
+            aiResponse.style.display = 'block';
+            aiResponse.innerHTML = '<h3>☀️ Đang vẽ mùa hạ Việt Nam...</h3>';
+
+            drawSunset();
+            setTimeout(() => drawBeach(), 500);
+
+            aiResponse.innerHTML = `
+                <h3>🎨 Mùa Hạ Đã Được Vẽ!</h3>
+                <p>Bức tranh mùa hạ với hoàng hôn rực rỡ và biển xanh đã được tạo ra. 
+                Bạn có thể thêm các chi tiết như tàu thuyền, cá nhảy, hay ngườii tắm biển để bức tranh thêm sinh động!</p>
+            `;
+        }
+
+        async function analyzeDrawing() {
+            const aiResponse = document.getElementById('aiResponse');
+            aiResponse.style.display = 'block';
+            aiResponse.innerHTML = '<h3>🤖 Đang phân tích bức vẽ...</h3>';
+
+            aiResponse.innerHTML = `
+                <h3>🎨 Phân Tích Bức Vẽ Mùa Hạ</h3>
+                <p>Bức vẽ của bạn thể hiện vẻ đẹp rực rỡ của mùa hạ Việt Nam với những gam màu ấm áp. 
+                Các yếu tố như biển xanh, hoàng hôn đỏ tạo nên không khí sôi động và tràn đầy năng lượng. 
+                Hãy tiếp tục phát huy sự sáng tạo của bạn!</p>
+            `;
+        }
+    </script>
+</body>
+</html>
