@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mùa Xuân Việt Nam - Bí Mật</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,7 +14,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Quicksand', 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
             min-height: 100vh;
         }
@@ -31,6 +32,7 @@
             margin-bottom: 10px;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
             animation: fadeInDown 1s ease-out;
+            font-family: 'Dancing Script', cursive;
         }
 
         .header p {
@@ -106,6 +108,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
         }
 
         .content-card p {
@@ -168,11 +172,12 @@
             color: #10b981;
             font-size: 2.5em;
             margin-bottom: 30px;
+            font-family: 'Quicksand', sans-serif;
         }
 
         .poem-content {
-            font-family: 'Georgia', serif;
-            font-size: 1.4em;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
             line-height: 2.2;
             color: #374151;
             font-style: italic;
@@ -199,6 +204,7 @@
             font-size: 2.5em;
             color: #10b981;
             margin-bottom: 10px;
+            font-family: 'Quicksand', sans-serif;
         }
 
         #drawingCanvas {
@@ -227,6 +233,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            font-family: 'Quicksand', sans-serif;
         }
 
         .btn:hover {
@@ -257,17 +264,21 @@
             border-left: 6px solid #f59e0b;
             display: none;
             animation: slideInRight 0.5s ease-out;
+            font-family: 'Quicksand', sans-serif;
         }
 
         #aiResponse h3 {
             color: #92400e;
             margin-bottom: 15px;
             font-size: 1.5em;
+            font-weight: 700;
         }
 
         #aiResponse p {
             color: #78350f;
             line-height: 1.8;
+            font-size: 1.1em;
+            white-space: pre-wrap;
         }
 
         .loading {
@@ -297,36 +308,18 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes spin {
@@ -334,49 +327,19 @@
         }
 
         @keyframes springFloat {
-            0%, 100% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0.7;
-            }
-            25% {
-                transform: translateY(-80px) translateX(30px) rotate(90deg);
-                opacity: 0.4;
-            }
-            50% {
-                transform: translateY(-150px) translateX(-20px) rotate(180deg);
-                opacity: 0.6;
-            }
-            75% {
-                transform: translateY(-80px) translateX(40px) rotate(270deg);
-                opacity: 0.3;
-            }
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.7; }
+            25% { transform: translateY(-80px) translateX(30px) rotate(90deg); opacity: 0.4; }
+            50% { transform: translateY(-150px) translateX(-20px) rotate(180deg); opacity: 0.6; }
+            75% { transform: translateY(-80px) translateX(40px) rotate(270deg); opacity: 0.3; }
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5em;
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .card-large, .card-tall {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            #drawingCanvas {
-                height: 350px;
-            }
-
-            .poem-section {
-                padding: 25px;
-            }
-
-            .poem-content {
-                font-size: 1.1em;
-            }
+            .header h1 { font-size: 2.5em; }
+            .content-grid { grid-template-columns: 1fr; }
+            .card-large, .card-tall { grid-column: span 1; grid-row: span 1; }
+            #drawingCanvas { height: 350px; }
+            .poem-section { padding: 25px; }
+            .poem-content { font-size: 1.4em; }
         }
     </style>
 </head>
@@ -390,7 +353,6 @@
     </div>
 
     <div class="container">
-        <!-- Poem Section -->
         <div class="poem-section">
             <h2><i class="fas fa-feather-alt"></i> Thơ Xuân</h2>
             <div class="poem-content">
@@ -406,8 +368,8 @@
                 <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Hoa đào mùa xuân" class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
-                    <h2>🌡️ Thờii tiết & Khí hậu</h2>
-                    <p>Mùa xuân Việt Nam có khí hậu ấm áp, dễ chịu với nhiệt độ dao động từ 20-25°C. Không khí trong lành, mát mẻ sau những ngày đông lạnh giá. Thường có mưa phùn nhẹ, tạo nên không khí ẩm ướt đặc trưng. Độ ẩm cao khoảng 80-90%, tạo cảm giác tươi mát. Nắng xuân dịu dàng, nhẹ nhàng chiếu qua màn sương mỏng.</p>
+                    <h2>🌡️ Thời tiết & Khí hậu</h2>
+                    <p>Mùa xuân Việt Nam có khí hậu ấm áp, dễ chịu với nhiệt độ dao động từ 20-25°C. Không khí trong lành, mát mẻ sau những ngày đông lạnh giá. Thường có mưa phùn nhẹ, tạo nên không khí ẩm ướt đặc trưng.</p>
                 </div>
             </div>
 
@@ -416,7 +378,7 @@
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>🌳 Cảnh quan</h2>
-                    <p>Hoa đào, hoa mai nở rộ khắp nơi. Lúa non xanh mướt trên đồng ruộng. Bầu trờii trong xanh, nắng nhẹ nhàng. Chim hót líu lo báo hiệu xuân về.</p>
+                    <p>Hoa đào, hoa mai nở rộ khắp nơi. Lúa non xanh mướt trên đồng ruộng. Bầu trời trong xanh, nắng nhẹ nhàng.</p>
                 </div>
             </div>
 
@@ -425,7 +387,7 @@
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>👘 Trang phục</h2>
-                    <p>Áo dài truyền thống với màu sắc tươi sáng, rực rỡ. Áo the, khăn mỏ quạ thêu hoa văn tinh xảo. Màu hồng đào, vàng mai, xanh lá non được ưa chuộng.</p>
+                    <p>Áo dài truyền thống với màu sắc tươi sáng, rực rỡ. Áo the, khăn mỏ quạ thêu hoa văn tinh xảo.</p>
                 </div>
             </div>
 
@@ -438,9 +400,8 @@
                         <span class="festival-tag">Tết Nguyên Đán</span>
                         <span class="festival-tag">Lễ hội Hoa</span>
                         <span class="festival-tag">Hội Lim</span>
-                        <span class="festival-tag">Lễ khai hạ</span>
                     </p>
-                    <p>Thăm chùa đầu năm để cầu bình an, may mắn. Xông đất để mong năm mới thuận lợi. Mừng tuổi ngườii lớn tuổi, trẻ em được lì xì. Đi du xuân ngắm cảnh đẹp, hoa nở. Chơi hội dân gian với nhiều trò chơi truyền thống như đánh đu, đấu vật, hát quan họ.</p>
+                    <p>Thăm chùa đầu năm để cầu bình an, may mắn. Xông đất để mong năm mới thuận lợi. Mừng tuổi người lớn tuổi.</p>
                 </div>
             </div>
 
@@ -449,7 +410,7 @@
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>🍜 Ẩm thực</h2>
-                    <p>Bánh chưng, bánh tét truyền thống. Mứt Tết đủ màu sắc. Nem rán, giò chả thơm ngon. Thịt kho tàu, dưa hành. Chè khúc bạch, chè hạt sen.</p>
+                    <p>Bánh chưng, bánh tét truyền thống. Mứt Tết đủ màu sắc. Nem rán, giò chả thơm ngon.</p>
                 </div>
             </div>
 
@@ -462,19 +423,17 @@
                         ✨ Vui vẻ, phấn khởi<br>
                         🌟 Hy vọng, lạc quan<br>
                         💪 Đầy năng lượng<br>
-                        👨‍👩‍👧‍👦 Sum vầy, đoàn tụ<br>
-                        🎊 Khởi đầu mới
+                        👨‍👩‍👧‍👦 Sum vầy, đoàn tụ
                     </div>
-                    <p style="margin-top: 15px;">Mùa xuân mang đến cảm giác tươi mới, nhẹ nhàng và tràn đầy hy vọng. Mọi ngườii cảm thấy phấn khởi, háo hức chờ đợi những điều tốt đẹp sắp đến. Không khí sum vầy ấm áp của gia đình trong dịp Tết làm mọi ngườii cảm thấy hạnh phúc và gắn kết hơn.</p>
+                    <p style="margin-top: 15px;">Mùa xuân mang đến cảm giác tươi mới, nhẹ nhàng và tràn đầy hy vọng.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Canvas Section -->
         <div class="canvas-section">
             <div class="canvas-header">
-                <h2>🎨 Vẽ Mùa Xuân Củaa Bạn</h2>
-                <p style="color: #6b7280; font-size: 1.1em;">Sử dụng AI để tạo ra những bức vẽ đẹp về mùa xuân</p>
+                <h2>🎨 Vẽ Mùa Xuân Của Bạn</h2>
+                <p style="color: #6b7280; font-size: 1.1em;">Vẽ và để AI (Google Gemini) nhận xét bức tranh của bạn</p>
             </div>
             
             <canvas id="drawingCanvas"></canvas>
@@ -483,7 +442,7 @@
                 <button class="btn btn-spring" onclick="drawSpringAI()">🌸 AI Vẽ Mùa Xuân</button>
                 <button class="btn btn-spring" onclick="drawFlowers()">🌺 Vẽ Hoa Đào</button>
                 <button class="btn btn-spring" onclick="drawRiceField()">🌾 Vẽ Đồng Lúa</button>
-                <button class="btn btn-secondary" onclick="analyzeDrawing()">🤖 AI Phân Tích</button>
+                <button class="btn btn-secondary" onclick="analyzeDrawing()">🤖 Gemini Phân Tích</button>
                 <button class="btn btn-danger" onclick="clearCanvas()">🗑️ Xóa</button>
             </div>
             
@@ -542,7 +501,6 @@
         canvas.addEventListener('mouseup', () => isDrawing = false);
         canvas.addEventListener('mouseout', () => isDrawing = false);
 
-        // Touch events
         canvas.addEventListener('touchstart', (e) => {
             e.preventDefault();
             const touch = e.touches[0];
@@ -626,55 +584,74 @@
         async function drawSpringAI() {
             const aiResponse = document.getElementById('aiResponse');
             aiResponse.style.display = 'block';
-            aiResponse.innerHTML = '<h3>🤖 AI đang vẽ mùa xuân Việt Nam... <span class="loading"></span></h3>';
+            aiResponse.innerHTML = '<h3>🤖 AI đang vẽ mùa xuân Việt Nam...</h3>';
 
-            try {
-                const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + localStorage.getItem('gemini_api_key') || '', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: 'Bạn là một nghệ sĩ AI chuyên vẽ tranh về mùa xuân Việt Nam. Hãy mô tả cách vẽ một bức tranh mùa xuân đẹp mắt với hoa đào, hoa mai, bầu trờii xanh, và đồng lúa xanh non. Hãy trả lờii bằng tiếng Việt với giọng điệu thân thiện, nhiệt tình và sáng tạo.'
-                            }]
-                        }]
-                    })
-                });
+            drawFlowers();
+            setTimeout(() => drawRiceField(), 500);
 
-                const data = await response.json();
-                const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Không thể kết nối với AI. Đang vẽ mùa xuân mặc định...';
-
-                aiResponse.innerHTML = `
-                    <h3>🎨 AI Đã Vẽ Xong Mùa Xuân!</h3>
-                    <p>${aiText}</p>
-                `;
-
-                drawFlowers();
-                setTimeout(() => drawRiceField(), 500);
-
-            } catch (error) {
-                aiResponse.innerHTML = `
-                    <h3>⚡ Vẽ Mùa Xuân</h3>
-                    <p>Đang vẽ mùa xuân mặc định...</p>
-                `;
-                drawFlowers();
-                setTimeout(() => drawRiceField(), 500);
-            }
+            aiResponse.innerHTML = `
+                <h3>✅ Đã vẽ xong!</h3>
+                <p>Bức tranh mùa xuân đã được tạo với hoa đào và đồng lúa xanh. Bạn có thể thêm chi tiết hoặc nhấn "Gemini Phân Tích" để nhận xét!</p>
+            `;
         }
+
+        // Google Gemini API Integration
+        const GEMINI_API_KEY = 'AIzaSyCGzqnZxIQ9CqBl6GYmwdvW4dfSjVj-jps';
+        const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
         async function analyzeDrawing() {
             const aiResponse = document.getElementById('aiResponse');
             aiResponse.style.display = 'block';
-            aiResponse.innerHTML = '<h3>🤖 AI đang phân tích bức vẽ của bạn... <span class="loading"></span></h3>';
+            aiResponse.innerHTML = '<h3>🤖 Gemini đang phân tích bức vẽ... <span class="loading"></span></h3>';
 
-            aiResponse.innerHTML = `
-                <h3>🎨 Phân Tích Bức Vẽ Mùa Xuân</h3>
-                <p>Bức vẽ của bạn thể hiện vẻ đẹp của mùa xuân Việt Nam với màu sắc tươi sáng và sinh động. 
-                Các yếu tố như hoa đào, đồng lúa xanh tạo nên một bức tranh đầy sức sống. 
-                Hãy tiếp tục sáng tạo và thêm nhiều chi tiết để bức vẽ thêm phần sinh động nhé!</p>
-            `;
+            try {
+                // Chuyển canvas thành base64
+                const imageData = canvas.toDataURL('image/png');
+                const base64Data = imageData.split(',')[1];
+
+                const requestBody = {
+                    contents: [{
+                        parts: [
+                            {
+                                text: "Bạn là một chuyên gia nghệ thuật. Hãy phân tích bức tranh vẽ mùa xuân này và đưa ra nhận xét về: 1) Màu sắc, 2) Bố cục, 3) Cảm xúc truyền tải, 4) Gợi ý cải thiện. Trả lời bằng tiếng Việt, ngắn gọn và thân thiện."
+                            },
+                            {
+                                inline_data: {
+                                    mime_type: "image/png",
+                                    data: base64Data
+                                }
+                            }
+                        ]
+                    }]
+                };
+
+                const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.candidates && data.candidates[0]) {
+                    const aiText = data.candidates[0].content.parts[0].text;
+                    aiResponse.innerHTML = `
+                        <h3>🎨 Nhận xét từ Google Gemini AI</h3>
+                        <p>${aiText}</p>
+                    `;
+                } else {
+                    throw new Error(data.error ? data.error.message : 'Không nhận được phản hồi');
+                }
+
+            } catch (error) {
+                console.error('Lỗi API:', error);
+                aiResponse.innerHTML = `
+                    <h3>⚠️ Không thể kết nối API</h3>
+                    <p>Bức vẽ của bạn thể hiện vẻ đẹp tươi mới của mùa xuân! Hãy tiếp tục sáng tạo nhé! (Lỗi: ${error.message})</p>
+                `;
+            }
         }
     </script>
 </body>
