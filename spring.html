@@ -450,7 +450,7 @@
         </div>
     </div>
 
-    <script>
+        <script>
         // Spring particles animation
         const springParticles = document.getElementById('springParticles');
         const flowers = ['🌸', '🌺', '🌼', '🌻', '💮', '🏵️', '🌷'];
@@ -581,75 +581,83 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height/2);
         }
 
-        async function drawSpringAI() {
+        function drawSpringAI() {
             const aiResponse = document.getElementById('aiResponse');
             aiResponse.style.display = 'block';
-            aiResponse.innerHTML = '<h3>🤖 AI đang vẽ mùa xuân Việt Nam...</h3>';
+            aiResponse.innerHTML = '<h3>🤖 Đang vẽ mùa xuân Việt Nam...</h3>';
 
             drawFlowers();
             setTimeout(() => drawRiceField(), 500);
 
             aiResponse.innerHTML = `
                 <h3>✅ Đã vẽ xong!</h3>
-                <p>Bức tranh mùa xuân đã được tạo với hoa đào và đồng lúa xanh. Bạn có thể thêm chi tiết hoặc nhấn "Gemini Phân Tích" để nhận xét!</p>
+                <p>Bức tranh mùa xuân đã được tạo với hoa đào và đồng lúa xanh. Bạn có thể thêm chi tiết hoặc nhấn "AI Phân Tích" để nhận xét!</p>
             `;
         }
 
-        // Google Gemini API Integration
-        const GEMINI_API_KEY = 'AIzaSyCy2XepWwnwesyUsfudUALz-vnb9h6BduE';
-        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+        // Groq API Integration (OpenAI compatible)
+        const GROQ_API_KEY = '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';
+        const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
         async function analyzeDrawing() {
             const aiResponse = document.getElementById('aiResponse');
             aiResponse.style.display = 'block';
-            aiResponse.innerHTML = '<h3>🤖 Gemini đang phân tích bức vẽ... <span class="loading"></span></h3>';
+            aiResponse.innerHTML = '<h3>🤖 AI đang phân tích bức vẽ... <span class="loading"></span></h3>';
 
             try {
-                // Chuyển canvas thành base64
                 const imageData = canvas.toDataURL('image/png');
-                const base64Data = imageData.split(',')[1];
-
-                const requestBody = {
-                    contents: [{
-                        parts: [
-                            {
-                                text: "Bạn là một chuyên gia nghệ thuật. Hãy phân tích bức tranh vẽ mùa xuân này và đưa ra nhận xét về: 1) Màu sắc, 2) Bố cục, 3) Cảm xúc truyền tải, 4) Gợi ý cải thiện. Trả lời bằng tiếng Việt, ngắn gọn và thân thiện."
-                            },
-                            {
-                                inline_data: {
-                                    mime_type: "image/png",
-                                    data: base64Data
-                                }
-                            }
-                        ]
-                    }]
-                };
-
-                const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+                
+                const response = await fetch(GROQ_API_URL, {
                     method: 'POST',
                     headers: {
+                        'Authorization': `Bearer ${GROQ_API_KEY}`,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(requestBody)
+                    body: JSON.stringify({
+                        model: "openai/gpt-oss-120b",
+                        messages: [
+                            {
+                                role: "user",
+                                content: [
+                                    {
+                                        type: "text",
+                                        text: "Bạn là một chuyên gia nghệ thuật. Hãy phân tích bức tranh vẽ mùa xuân này và đưa ra nhận xét về: 1) Màu sắc, 2) Bố cục, 3) Cảm xúc truyền tải, 4) Gợi ý cải thiện. Trả lời bằng tiếng Việt, ngắn gọn và thân thiện."
+                                    },
+                                    {
+                                        type: "image_url",
+                                        image_url: {
+                                            url: imageData
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        max_tokens: 1000
+                    })
                 });
 
                 const data = await response.json();
 
-                if (response.ok && data.candidates && data.candidates[0]) {
-                    const aiText = data.candidates[0].content.parts[0].text;
+                if (!response.ok) {
+                    throw new Error(data.error?.message || `HTTP ${response.status}`);
+                }
+
+                if (data.choices && data.choices[0] && data.choices[0].message) {
+                    const aiText = data.choices[0].message.content;
                     aiResponse.innerHTML = `
-                        <h3>🎨 Nhận xét từ Google Gemini AI</h3>
+                        <h3>🎨 Nhận xét từ AI</h3>
                         <p>${aiText}</p>
                     `;
                 } else {
-                    throw new Error(data.error ? data.error.message : 'Không nhận được phản hồi');
+                    throw new Error('Không nhận được phản hồi hợp lệ');
                 }
 
             } catch (error) {
                 console.error('Lỗi API:', error);
                 aiResponse.innerHTML = `
                     <h3>⚠️ Không thể kết nối API</h3>
-                    <p>Bức vẽ của bạn thể hiện vẻ đẹp tươi mới của mùa xuân! Hãy tiếp tục sáng tạo nhé! (Lỗi: ${error.message})</p>
+                    <p>Bức vẽ của bạn thể hiện vẻ đẹp tươi mới của mùa xuân! Hãy tiếp tục sáng tạo nhé!<br>
+                    <small style="color:#888;">(Lỗi: ${error.message})</small></p>
                 `;
             }
         }
