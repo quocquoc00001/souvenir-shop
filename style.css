@@ -15,6 +15,7 @@
 html { scroll-behavior: smooth; }
 
 body {
+    font-family: 'Quicksand', 'Nunito', 'Arial', sans-serif;
     background: var(--pastel-bg);
     background: linear-gradient(135deg, var(--pastel-bg), var(--light-pink), var(--primary-pink));
     min-height: 100vh;
@@ -285,7 +286,7 @@ h1, h2, h3, .shop-name, .fancy-title {
 }
 
 .secret-message-display p {
-    font-family: 'Georgia', serif;
+    font-family: 'Quicksand', 'Segoe UI', serif;
     font-size: 1.2rem;
     font-style: italic;
     line-height: 1.8;
