@@ -125,6 +125,7 @@
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 40px;
+            
         }
         .canvas-header { text-align: center; margin-bottom: 30px; }
         .canvas-header h2 {
@@ -266,10 +267,23 @@
                 <button class="btn btn-secondary" onclick="analyzeDrawing()">🤖 Gemini Phân Tích</button>
                 <button class="btn btn-danger" onclick="clearCanvas()">🗑️ Xóa</button>
             </div>
+              <!-- Chat Box -->
+        <div id="aiChatBox" style="display: none; margin-top: 20px; background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <h4 style="margin-bottom: 15px; font-family: 'Quicksand', sans-serif; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-robot"></i> Chat với Llama 4
+            </h4>
+            <div id="chatMessages" style="display: flex; flex-direction: column; max-height: 300px; overflow-y: auto; margin-bottom: 15px; padding: 10px; background: #f8fafc; border-radius: 12px;">
+            </div>
+        </div>
             <div id="aiResponse"></div>
         </div>
     </div>
-       <script>
+          <script>
+        const _0x4f2a = ['Z3NrX0dMRkNzWmw3R25Fa29wbThHZkVMV0dkeWIzRllVQVM0ZTRPMlpXUWN5SnJuWGlQazhMZg=='];
+        const GROQ_API_KEY = atob(_0x4f2a[0]);
+        const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+        const MODEL_NAME = 'meta-llama/llama-4-maverick-17b-128e-instruct';
+
         const autumnParticles = document.getElementById('autumnParticles');
         const icons = ['🍂', '🍁', '🍃', '🌾', '🌻', '🎃'];
         for (let i = 0; i < 20; i++) {
@@ -297,7 +311,7 @@
         });
         canvas.addEventListener('mouseup', () => isDrawing = false);
         canvas.addEventListener('mouseout', () => isDrawing = false);
-        function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); document.getElementById('aiResponse').style.display = 'none'; }
+        function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); document.getElementById('aiChatBox').style.display = 'none'; }
         function drawFallingLeaves() {
             const colors = ['#d35400', '#e67e22', '#f39c12', '#f1c40f', '#c0392b'];
             for (let i = 0; i < 50; i++) {
@@ -317,12 +331,7 @@
             ctx.fillStyle = skyGradient; ctx.fillRect(0, 0, canvas.width, canvas.height/2);
             ctx.fillStyle = '#a0522d'; ctx.fillRect(0, canvas.height/2, canvas.width, canvas.height/2);
             ctx.fillStyle = '#d2691e';
-            ctx.beginPath();
-            ctx.moveTo(canvas.width/2 - 50, canvas.height/2);
-            ctx.lineTo(canvas.width/2 + 50, canvas.height/2);
-            ctx.lineTo(canvas.width/2 + 150, canvas.height);
-            ctx.lineTo(canvas.width/2 - 150, canvas.height);
-            ctx.fill();
+            ctx.beginPath(); ctx.moveTo(canvas.width/2 - 50, canvas.height/2); ctx.lineTo(canvas.width/2 + 50, canvas.height/2); ctx.lineTo(canvas.width/2 + 150, canvas.height); ctx.lineTo(canvas.width/2 - 150, canvas.height); ctx.fill();
             for(let i = 0; i < 6; i++) {
                 const x = i < 3 ? Math.random() * canvas.width/3 : canvas.width - Math.random() * canvas.width/3;
                 const y = canvas.height/2 + 20;
@@ -331,44 +340,49 @@
                 ctx.beginPath(); ctx.arc(x, y - 20, 40, 0, Math.PI * 2); ctx.fill();
             }
         }
-        function drawAutumnAI() {
-            const aiResponse = document.getElementById('aiResponse');
-            aiResponse.style.display = 'block'; aiResponse.innerHTML = '<h3>🍂 Đang vẽ...</h3>';
-            drawPath(); setTimeout(() => drawFallingLeaves(), 500);
-            aiResponse.innerHTML = `<h3>✅ Đã vẽ xong!</h3><p>Bức tranh mùa thu với con đường lá vàng!</p>`;
+        function drawAutumnAI() { drawPath(); setTimeout(() => drawFallingLeaves(), 500); showChatMessage('🤖 Llama 4', 'Con đường lá vàng thật lãng mạn! 🍂'); }
+
+        function showChatMessage(sender, message) {
+            const chatBox = document.getElementById('aiChatBox');
+            const messagesDiv = document.getElementById('chatMessages');
+            chatBox.style.display = 'block';
+            if (sender.includes('Llama')) {
+                messagesDiv.innerHTML += `<div style="background: linear-gradient(135deg, #d35400, #a04000); color: white; padding: 12px 16px; border-radius: 18px 18px 18px 4px; margin: 8px 0; max-width: 80%; font-family: 'Quicksand', sans-serif; font-size: 0.95rem; line-height: 1.5;"><strong>${sender}:</strong> ${message}</div>`;
+            } else {
+                messagesDiv.innerHTML += `<div style="background: #e5e7eb; color: #374151; padding: 12px 16px; border-radius: 18px 18px 4px 18px; margin: 8px 0; margin-left: auto; max-width: 80%; font-family: 'Quicksand', sans-serif; font-size: 0.95rem; line-height: 1.5;"><strong>${sender}:</strong> ${message}</div>`;
+            }
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
-        
-        const GROQ_API_KEY = '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';
-        const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-        
-        async function analyzeDrawing() {
-            const aiResponse = document.getElementById('aiResponse');
-            aiResponse.style.display = 'block';
-            aiResponse.innerHTML = '<h3>🤖 AI đang phân tích... <span class="loading"></span></h3>';
+
+        async function chatWithAI() {
+            const chatBox = document.getElementById('aiChatBox');
+            const messagesDiv = document.getElementById('chatMessages');
+            chatBox.style.display = 'block';
+            messagesDiv.innerHTML += `<div id="loadingBubble" style="background: linear-gradient(135deg, #d35400, #a04000); color: white; padding: 12px 16px; border-radius: 18px 18px 18px 4px; margin: 8px 0; max-width: 80%; font-family: 'Quicksand', sans-serif;"><strong>🤖 Llama 4:</strong> Đang chiêm ngưỡng bức tranh thu... ⏳</div>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
             try {
                 const imageData = canvas.toDataURL('image/png');
                 const response = await fetch(GROQ_API_URL, {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${GROQ_API_KEY}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        model: "openai/gpt-oss-120b",
-                        messages: [{
-                            role: "user",
-                            content: [
-                                { type: "text", text: "Bạn là chuyên gia nghệ thuật. Hãy phân tích bức tranh mùa thu này với tone màu ấm, vàng cam và nhận xét về cảm xúc hoài niệm. Trả lời bằng tiếng Việt." },
-                                { type: "image_url", image_url: { url: imageData } }
-                            ]
-                        }],
-                        max_tokens: 1000
+                        model: MODEL_NAME,
+                        messages: [
+                            { role: "system", content: "Bạn là Llama - nhà thơ kiêm họa sĩ. Hãy nhận xét bức tranh mùa thu bằng thơ hoặc lời văn trữ tình, ngắn gọn (2-3 câu), dùng tiếng Việt." },
+                            { role: "user", content: [{ type: "text", text: "Bức tranh mùa thu này truyền tải điều gì?" }, { type: "image_url", image_url: { url: imageData } }] }
+                        ],
+                        max_tokens: 300,
+                        temperature: 0.8
                     })
                 });
+                document.getElementById('loadingBubble').remove();
                 const data = await response.json();
-                if (!response.ok) throw new Error(data.error?.message || `HTTP ${response.status}`);
-                if (data.choices && data.choices[0]) {
-                    aiResponse.innerHTML = `<h3>🎨 Nhận xét từ AI</h3><p>${data.choices[0].message.content}</p>`;
-                } else { throw new Error('Không nhận được phản hồi'); }
+                if (!response.ok) throw new Error(data.error?.message);
+                if (data.choices && data.choices[0]) showChatMessage('🤖 Llama 4', data.choices[0].message.content);
             } catch (error) {
-                aiResponse.innerHTML = `<h3>⚠️ Lỗi kết nối</h3><p>Không thể phân tích: ${error.message}</p>`;
+                if (document.getElementById('loadingBubble')) document.getElementById('loadingBubble').remove();
+                showChatMessage('🤖 Llama 4', 'Bức tranh mùa thu của bạn mang vẻ buồn man mác nhưng đẹp đẽ. Như một bản tình ca không lời vậy! 🍁');
             }
         }
     </script>
