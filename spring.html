@@ -447,25 +447,14 @@
             </div>
             
             <div id="aiResponse"></div>
-              <!-- Chat Box -->
-                  <div id="aiChatBox" style="display: none; margin-top: 20px; background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                  <h4 style="margin-bottom: 15px; font-family: 'Quicksand', sans-serif; display: flex; align-items: center; gap: 8px;">
-                   <i class="fas fa-robot"></i> Chat với Llama 4
-                    </h4>
-                       <div id="chatMessages" style="display: flex; flex-direction: column; max-height: 300px; overflow-y: auto; margin-bottom: 15px; padding: 10px; background: #f8fafc; border-radius: 12px;">
-                     </div>
-                </div>
-         </div>
+        </div>
     </div>
 
-           <script>
-        const _0x4f2a = ['Z3NrX0dMRkNzWmw3R25Fa29wbThHZkVMV0dkeWIzRllVQVM0ZTRPMlpXUWN5SnJuWGlQazhMZg=='];
-        const GROQ_API_KEY = atob(_0x4f2a[0]);
-        const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-        const MODEL_NAME = 'meta-llama/llama-4-maverick-17b-128e-instruct';
-
+        <script>
+        // Spring particles animation
         const springParticles = document.getElementById('springParticles');
         const flowers = ['🌸', '🌺', '🌼', '🌻', '💮', '🏵️', '🌷'];
+        
         for (let i = 0; i < 20; i++) {
             const particle = document.createElement('div');
             particle.className = 'spring-particle';
@@ -477,20 +466,38 @@
             springParticles.appendChild(particle);
         }
 
+        // Canvas setup
         const canvas = document.getElementById('drawingCanvas');
         const ctx = canvas.getContext('2d');
-        function resizeCanvas() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+        
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        let isDrawing = false, lastX = 0, lastY = 0;
-        canvas.addEventListener('mousedown', (e) => { isDrawing = true; [lastX, lastY] = [e.offsetX, e.offsetY]; });
-        canvas.addEventListener('mousemove', (e) => {
-            if (!isDrawing) return;
-            ctx.strokeStyle = '#10b981'; ctx.lineWidth = 3; ctx.lineCap = 'round';
-            ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(e.offsetX, e.offsetY); ctx.stroke();
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
             [lastX, lastY] = [e.offsetX, e.offsetY];
         });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+
         canvas.addEventListener('mouseup', () => isDrawing = false);
         canvas.addEventListener('mouseout', () => isDrawing = false);
 
@@ -501,20 +508,27 @@
             isDrawing = true;
             [lastX, lastY] = [touch.clientX - rect.left, touch.clientY - rect.top];
         });
+
         canvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
             if (!isDrawing) return;
             const touch = e.touches[0];
             const rect = canvas.getBoundingClientRect();
-            ctx.strokeStyle = '#10b981'; ctx.lineWidth = 3; ctx.lineCap = 'round';
-            ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top); ctx.stroke();
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+            ctx.stroke();
             [lastX, lastY] = [touch.clientX - rect.left, touch.clientY - rect.top];
         });
+
         canvas.addEventListener('touchend', () => isDrawing = false);
 
-        function clearCanvas() { 
-            ctx.clearRect(0, 0, canvas.width, canvas.height); 
-            document.getElementById('aiChatBox').style.display = 'none';
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('aiResponse').style.display = 'none';
         }
 
         function drawFlowers() {
@@ -522,13 +536,19 @@
                 const x = Math.random() * canvas.width;
                 const y = Math.random() * canvas.height / 2;
                 const size = Math.random() * 20 + 10;
+                
                 ctx.fillStyle = `rgba(255, 182, 193, ${Math.random() * 0.4 + 0.6})`;
                 for (let j = 0; j < 5; j++) {
                     ctx.beginPath();
                     const angle = (j * 72) * Math.PI / 180;
-                    ctx.ellipse(x + Math.cos(angle) * size/2, y + Math.sin(angle) * size/2, size/2, size/3, angle, 0, Math.PI * 2);
+                    ctx.ellipse(
+                        x + Math.cos(angle) * size/2,
+                        y + Math.sin(angle) * size/2,
+                        size/2, size/3, angle, 0, Math.PI * 2
+                    );
                     ctx.fill();
                 }
+                
                 ctx.fillStyle = '#fbbf24';
                 ctx.beginPath();
                 ctx.arc(x, y, size/4, 0, Math.PI * 2);
@@ -542,13 +562,18 @@
             gradient.addColorStop(1, '#22c55e');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, canvas.height/2, canvas.width, canvas.height/2);
+            
             for (let i = 0; i < 100; i++) {
                 const x = Math.random() * canvas.width;
                 const y = canvas.height/2 + Math.random() * canvas.height/2;
                 ctx.strokeStyle = `rgba(34, 197, 94, ${Math.random() * 0.5 + 0.5})`;
                 ctx.lineWidth = 2;
-                ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, y - 20 - Math.random() * 20); ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x, y - 20 - Math.random() * 20);
+                ctx.stroke();
             }
+            
             const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height/2);
             skyGradient.addColorStop(0, '#dbeafe');
             skyGradient.addColorStop(1, '#bfdbfe');
@@ -557,32 +582,31 @@
         }
 
         function drawSpringAI() {
+            const aiResponse = document.getElementById('aiResponse');
+            aiResponse.style.display = 'block';
+            aiResponse.innerHTML = '<h3>🤖 Đang vẽ mùa xuân Việt Nam...</h3>';
+
             drawFlowers();
             setTimeout(() => drawRiceField(), 500);
-            showChatMessage('🤖 Llama 4', 'Mình đã vẽ xong một bức tranh mùa xuân với hoa đào và đồng lúa! Bạn muốn vẽ thêm gì không?');
+
+            aiResponse.innerHTML = `
+                <h3>✅ Đã vẽ xong!</h3>
+                <p>Bức tranh mùa xuân đã được tạo với hoa đào và đồng lúa xanh. Bạn có thể thêm chi tiết hoặc nhấn "AI Phân Tích" để nhận xét!</p>
+            `;
         }
 
-        function showChatMessage(sender, message) {
-            const chatBox = document.getElementById('aiChatBox');
-            const messagesDiv = document.getElementById('chatMessages');
-            chatBox.style.display = 'block';
-            if (sender.includes('Llama')) {
-                messagesDiv.innerHTML += `<div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 12px 16px; border-radius: 18px 18px 18px 4px; margin: 8px 0; max-width: 80%; font-family: 'Quicksand', sans-serif; font-size: 0.95rem; line-height: 1.5; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"><strong>${sender}:</strong> ${message}</div>`;
-            } else {
-                messagesDiv.innerHTML += `<div style="background: #e5e7eb; color: #374151; padding: 12px 16px; border-radius: 18px 18px 4px 18px; margin: 8px 0; margin-left: auto; max-width: 80%; font-family: 'Quicksand', sans-serif; font-size: 0.95rem; line-height: 1.5;"><strong>${sender}:</strong> ${message}</div>`;
-            }
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
+        // Groq API Integration (OpenAI compatible)
+        const GROQ_API_KEY = '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';
+        const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
-        async function chatWithAI() {
-            const chatBox = document.getElementById('aiChatBox');
-            const messagesDiv = document.getElementById('chatMessages');
-            chatBox.style.display = 'block';
-            messagesDiv.innerHTML += `<div id="loadingBubble" style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 12px 16px; border-radius: 18px 18px 18px 4px; margin: 8px 0; max-width: 80%; font-family: 'Quicksand', sans-serif;"><strong>🤖 Llama 4:</strong> Đang xem bức vẽ của bạn... <span class="loading">⏳</span></div>`;
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        async function analyzeDrawing() {
+            const aiResponse = document.getElementById('aiResponse');
+            aiResponse.style.display = 'block';
+            aiResponse.innerHTML = '<h3>🤖 AI đang phân tích bức vẽ... <span class="loading"></span></h3>';
 
             try {
                 const imageData = canvas.toDataURL('image/png');
+                
                 const response = await fetch(GROQ_API_URL, {
                     method: 'POST',
                     headers: {
@@ -590,42 +614,51 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        model: MODEL_NAME,
+                        model: "openai/gpt-oss-120b",
                         messages: [
-                            {
-                                role: "system",
-                                content: "Bạn là một họa sĩ AI tên là Llama. Hãy nói chuyện thân thiện, đưa ra cảm nhận chân thành về bức tranh người dùng vẽ. Trả lời bằng tiếng Việt, ngắn gọn (2-3 câu), mang tính động viên và nghệ thuật."
-                            },
                             {
                                 role: "user",
                                 content: [
-                                    { type: "text", text: "Bạn thấy bức tranh này thế nào? Hãy chia sẻ cảm nhận của bạn." },
-                                    { type: "image_url", image_url: { url: imageData } }
+                                    {
+                                        type: "text",
+                                        text: "Bạn là một chuyên gia nghệ thuật. Hãy phân tích bức tranh vẽ mùa xuân này và đưa ra nhận xét về: 1) Màu sắc, 2) Bố cục, 3) Cảm xúc truyền tải, 4) Gợi ý cải thiện. Trả lời bằng tiếng Việt, ngắn gọn và thân thiện."
+                                    },
+                                    {
+                                        type: "image_url",
+                                        image_url: {
+                                            url: imageData
+                                        }
+                                    }
                                 ]
                             }
                         ],
-                        max_tokens: 300,
-                        temperature: 0.7
+                        max_tokens: 1000
                     })
                 });
 
-                document.getElementById('loadingBubble').remove();
                 const data = await response.json();
 
                 if (!response.ok) {
-                    throw new Error(data.error?.message || `Lỗi ${response.status}`);
+                    throw new Error(data.error?.message || `HTTP ${response.status}`);
                 }
 
                 if (data.choices && data.choices[0] && data.choices[0].message) {
-                    showChatMessage('🤖 Llama 4', data.choices[0].message.content);
+                    const aiText = data.choices[0].message.content;
+                    aiResponse.innerHTML = `
+                        <h3>🎨 Nhận xét từ AI</h3>
+                        <p>${aiText}</p>
+                    `;
                 } else {
-                    throw new Error('Không nhận được phản hồi');
+                    throw new Error('Không nhận được phản hồi hợp lệ');
                 }
 
             } catch (error) {
-                if (document.getElementById('loadingBubble')) document.getElementById('loadingBubble').remove();
-                console.error('Lỗi:', error);
-                showChatMessage('🤖 Llama 4', 'Bức tranh mùa xuân của bạn rất tươi sáng! Tôi thích cách bạn phối màu, thật sự rất có hồn! 🌸');
+                console.error('Lỗi API:', error);
+                aiResponse.innerHTML = `
+                    <h3>⚠️ Không thể kết nối API</h3>
+                    <p>Bức vẽ của bạn thể hiện vẻ đẹp tươi mới của mùa xuân! Hãy tiếp tục sáng tạo nhé!<br>
+                    <small style="color:#888;">(Lỗi: ${error.message})</small></p>
+                `;
             }
         }
     </script>
