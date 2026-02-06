@@ -1,37 +1,52 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mùa Đông Việt Nam - Bí Mật</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@600;700&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Quicksand', 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%);
             min-height: 100vh;
         }
+
         .header {
             background: linear-gradient(135deg, #0984e3 0%, #2d3436 100%);
             color: white;
             padding: 40px 20px;
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
+
         .header h1 {
             font-size: 4em;
             margin-bottom: 10px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
             animation: fadeInDown 1s ease-out;
             font-family: 'Dancing Script', cursive;
         }
-        .header p { font-size: 1.5em; opacity: 0.95; }
+
+        .header p {
+            font-size: 1.5em;
+            opacity: 0.95;
+        }
+
         .back-btn {
             display: inline-block;
             padding: 12px 30px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
             border-radius: 25px;
@@ -39,22 +54,56 @@
             transition: all 0.3s ease;
             border: 2px solid white;
         }
-        .back-btn:hover { background: white; color: #0984e3; transform: translateY(-3px); }
-        .container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
-        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+
+        .back-btn:hover {
+            background: white;
+            color: #0984e3;
+            transform: translateY(-3px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
         .content-card {
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
             animation: fadeIn 0.8s ease-out;
             position: relative;
         }
-        .content-card:hover { transform: translateY(-10px) rotate(1deg); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
-        .card-image { width: 100%; height: 200px; object-fit: cover; transition: transform 0.5s ease; }
-        .content-card:hover .card-image { transform: scale(1.1); }
-        .card-content { padding: 30px; }
+
+        .content-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .content-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
         .content-card h2 {
             color: #0984e3;
             font-size: 1.8em;
@@ -65,9 +114,21 @@
             font-family: 'Quicksand', sans-serif;
             font-weight: 700;
         }
-        .content-card p { color: #374151; line-height: 1.8; font-size: 1.1em; }
-        .card-large { grid-column: span 2; }
-        .card-tall { grid-row: span 2; }
+
+        .content-card p {
+            color: #374151;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .card-large {
+            grid-column: span 2;
+        }
+
+        .card-tall {
+            grid-row: span 2;
+        }
+
         .image-overlay {
             position: absolute;
             top: 0;
@@ -77,6 +138,7 @@
             background: linear-gradient(to bottom, transparent 0%, rgba(9, 132, 227, 0.3) 100%);
             pointer-events: none;
         }
+
         .festival-tag {
             display: inline-block;
             padding: 8px 15px;
@@ -87,6 +149,7 @@
             font-size: 0.95em;
             font-weight: bold;
         }
+
         .emotion-box {
             background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%);
             padding: 20px;
@@ -97,20 +160,23 @@
             color: #2d3436;
             margin-top: 15px;
         }
+
         .poem-section {
             background: white;
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
             text-align: center;
         }
+
         .poem-section h2 {
             color: #0984e3;
             font-size: 2.5em;
             margin-bottom: 30px;
             font-family: 'Quicksand', sans-serif;
         }
+
         .poem-content {
             font-family: 'Dancing Script', cursive;
             font-size: 1.8em;
@@ -118,21 +184,31 @@
             color: #374151;
             font-style: italic;
         }
-        .poem-content p { margin: 15px 0; }
+
+        .poem-content p {
+            margin: 15px 0;
+        }
+
         .canvas-section {
             background: white;
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
         }
-        .canvas-header { text-align: center; margin-bottom: 30px; }
+
+        .canvas-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
         .canvas-header h2 {
             font-size: 2.5em;
             color: #0984e3;
             margin-bottom: 10px;
             font-family: 'Quicksand', sans-serif;
         }
+
         #drawingCanvas {
             width: 100%;
             height: 500px;
@@ -141,7 +217,15 @@
             cursor: crosshair;
             background: #f8fafc;
         }
-        .controls { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px; justify-content: center; }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
         .btn {
             padding: 15px 30px;
             border: none;
@@ -150,13 +234,30 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             font-family: 'Quicksand', sans-serif;
         }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
-        .btn-winter { background: linear-gradient(135deg, #0984e3 0%, #2d3436 100%); color: white; }
-        .btn-secondary { background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); color: white; }
-        .btn-danger { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-winter {
+            background: linear-gradient(135deg, #0984e3 0%, #2d3436 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+
         #aiResponse {
             margin-top: 30px;
             padding: 25px;
@@ -167,8 +268,21 @@
             animation: slideInRight 0.5s ease-out;
             font-family: 'Quicksand', sans-serif;
         }
-        #aiResponse h3 { color: #2d3436; margin-bottom: 15px; font-size: 1.5em; font-weight: 700; }
-        #aiResponse p { color: #636e72; line-height: 1.8; font-size: 1.1em; white-space: pre-wrap; }
+
+        #aiResponse h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        #aiResponse p {
+            color: #636e72;
+            line-height: 1.8;
+            font-size: 1.1em;
+            white-space: pre-wrap;
+        }
+
         .loading {
             display: inline-block;
             width: 20px;
@@ -178,28 +292,119 @@
             border-top-color: #2d3436;
             animation: spin 1s ease-in-out infinite;
         }
-        .winter-particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
-        .winter-particle { position: absolute; font-size: 2em; animation: winterFloat 8s infinite; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes winterFloat {
-            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.7; }
-            25% { transform: translateY(-80px) translateX(30px) rotate(90deg); opacity: 0.4; }
-            50% { transform: translateY(-150px) translateX(-20px) rotate(180deg); opacity: 0.6; }
-            75% { transform: translateY(-80px) translateX(40px) rotate(270deg); opacity: 0.3; }
+
+        .winter-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
         }
+
+        .winter-particle {
+            position: absolute;
+            font-size: 2em;
+            animation: winterFloat 8s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes winterFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            25% {
+                transform: translateY(-80px) translateX(30px) rotate(90deg);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: translateY(-150px) translateX(-20px) rotate(180deg);
+                opacity: 0.6;
+            }
+
+            75% {
+                transform: translateY(-80px) translateX(40px) rotate(270deg);
+                opacity: 0.3;
+            }
+        }
+
         @media (max-width: 768px) {
-            .header h1 { font-size: 2.5em; }
-            .content-grid { grid-template-columns: 1fr; }
-            .card-large, .card-tall { grid-column: span 1; grid-row: span 1; }
-            #drawingCanvas { height: 350px; }
-            .poem-section { padding: 25px; }
-            .poem-content { font-size: 1.4em; }
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-large,
+            .card-tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            #drawingCanvas {
+                height: 350px;
+            }
+
+            .poem-section {
+                padding: 25px;
+            }
+
+            .poem-content {
+                font-size: 1.4em;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="winter-particles" id="winterParticles"></div>
     <div class="header">
@@ -219,15 +424,18 @@
         </div>
         <div class="content-grid">
             <div class="content-card card-large">
-                <img src="https://images.unsplash.com/photo-1483664852095-d6cc687070ef?w=800&q=80" alt="Mùa đông" class="card-image">
+                <img src="https://images.unsplash.com/photo-1483664852095-d6cc687070ef?w=800&q=80" alt="Mùa đông"
+                    class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>🌡️ Thời tiết & Khí hậu</h2>
-                    <p>Mùa đông miền Bắc Việt Nam lạnh với nhiệt độ dao động từ 10-20°C, có khi xuống dưới 10°C. Gió mùa đông bắc se lạnh thổi về.</p>
+                    <p>Mùa đông miền Bắc Việt Nam lạnh với nhiệt độ dao động từ 10-20°C, có khi xuống dưới 10°C. Gió mùa
+                        đông bắc se lạnh thổi về.</p>
                 </div>
             </div>
             <div class="content-card card-tall">
-                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" alt="Lễ hội mùa đông" class="card-image">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" alt="Lễ hội mùa đông"
+                    class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>🎊 Lễ hội & Hoạt động</h2>
@@ -240,7 +448,8 @@
                 </div>
             </div>
             <div class="content-card card-large">
-                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80" alt="Cảm xúc mùa đông" class="card-image">
+                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80"
+                    alt="Cảm xúc mùa đông" class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>💝 Cảm xúc cá nhân</h2>
@@ -249,7 +458,8 @@
                         🔥 Gắn kết gia đình<br>
                         🎊 Háo hức chờ Tết
                     </div>
-                    <p style="margin-top: 15px;">Mùa đông mang đến cảm giác se lạnh nhưng cũng ấm áp khi quây quần bên gia đình.</p>
+                    <p style="margin-top: 15px;">Mùa đông mang đến cảm giác se lạnh nhưng cũng ấm áp khi quây quần bên
+                        gia đình.</p>
                 </div>
             </div>
         </div>
@@ -269,7 +479,7 @@
             <div id="aiResponse"></div>
         </div>
     </div>
-        <script>
+    <script>
         const winterParticles = document.getElementById('winterParticles');
         const icons = ['❄️', '☃️', '🔥', '🧣', '🧤', '🎄'];
         for (let i = 0; i < 20; i++) {
@@ -288,7 +498,7 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
         let isDrawing = false, lastX = 0, lastY = 0;
-        canvas.addEventListener('mousedown', (e) => { isDrawing = true; [lastX, lastY] = [e.offsetX, e.offsetY]; });
+        canvas.addEventListener('mousedown', (e) => { isDrawing = true;[lastX, lastY] = [e.offsetX, e.offsetY]; });
         canvas.addEventListener('mousemove', (e) => {
             if (!isDrawing) return;
             ctx.strokeStyle = '#0984e3'; ctx.lineWidth = 3; ctx.lineCap = 'round';
@@ -313,15 +523,15 @@
         }
         function drawFireplace() {
             ctx.fillStyle = '#2d3436'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            const fpX = canvas.width/2 - 100; const fpY = canvas.height/2;
+            const fpX = canvas.width / 2 - 100; const fpY = canvas.height / 2;
             ctx.fillStyle = '#636e72'; ctx.fillRect(fpX, fpY, 200, 150);
             const fireColors = ['#ff4757', '#ff6348', '#ffa502', '#ffc312'];
-            for(let i = 0; i < 30; i++) {
+            for (let i = 0; i < 30; i++) {
                 ctx.fillStyle = fireColors[Math.floor(Math.random() * fireColors.length)];
                 const fx = fpX + 50 + Math.random() * 100;
                 const fy = fpY + 100 - Math.random() * 80;
                 const size = Math.random() * 15 + 5;
-                ctx.beginPath(); ctx.moveTo(fx, fy); ctx.lineTo(fx - size/2, fy + size); ctx.lineTo(fx + size/2, fy + size); ctx.fill();
+                ctx.beginPath(); ctx.moveTo(fx, fy); ctx.lineTo(fx - size / 2, fy + size); ctx.lineTo(fx + size / 2, fy + size); ctx.fill();
             }
             ctx.strokeStyle = '#8b4513'; ctx.lineWidth = 8;
             ctx.beginPath(); ctx.moveTo(fpX + 60, fpY + 130); ctx.lineTo(fpX + 140, fpY + 130); ctx.stroke();
@@ -332,10 +542,10 @@
             drawSnow(); setTimeout(() => drawFireplace(), 500);
             aiResponse.innerHTML = `<h3>✅ Đã vẽ xong!</h3><p>Bức tranh mùa đông với tuyết rơi và bếp lửa!</p>`;
         }
-        
+
         const GROQ_API_KEY = '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';
         const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
-        
+
         async function analyzeDrawing() {
             const aiResponse = document.getElementById('aiResponse');
             aiResponse.style.display = 'block';
@@ -368,4 +578,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mùa Xuân Việt Nam - Bí Mật</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Dancing+Script:wght@600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -24,13 +27,13 @@
             color: white;
             padding: 40px 20px;
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         .header h1 {
             font-size: 4em;
             margin-bottom: 10px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
             animation: fadeInDown 1s ease-out;
             font-family: 'Dancing Script', cursive;
         }
@@ -43,7 +46,7 @@
         .back-btn {
             display: inline-block;
             padding: 12px 30px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
             border-radius: 25px;
@@ -75,7 +78,7 @@
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
             animation: fadeIn 0.8s ease-out;
             position: relative;
@@ -83,7 +86,7 @@
 
         .content-card:hover {
             transform: translateY(-10px) rotate(1deg);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         }
 
         .card-image {
@@ -163,7 +166,7 @@
             background: white;
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
             text-align: center;
         }
@@ -191,7 +194,7 @@
             background: white;
             border-radius: 20px;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
         }
 
@@ -232,13 +235,13 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             font-family: 'Quicksand', sans-serif;
         }
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         .btn-spring {
@@ -308,41 +311,101 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes springFloat {
-            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.7; }
-            25% { transform: translateY(-80px) translateX(30px) rotate(90deg); opacity: 0.4; }
-            50% { transform: translateY(-150px) translateX(-20px) rotate(180deg); opacity: 0.6; }
-            75% { transform: translateY(-80px) translateX(40px) rotate(270deg); opacity: 0.3; }
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            25% {
+                transform: translateY(-80px) translateX(30px) rotate(90deg);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: translateY(-150px) translateX(-20px) rotate(180deg);
+                opacity: 0.6;
+            }
+
+            75% {
+                transform: translateY(-80px) translateX(40px) rotate(270deg);
+                opacity: 0.3;
+            }
         }
 
         @media (max-width: 768px) {
-            .header h1 { font-size: 2.5em; }
-            .content-grid { grid-template-columns: 1fr; }
-            .card-large, .card-tall { grid-column: span 1; grid-row: span 1; }
-            #drawingCanvas { height: 350px; }
-            .poem-section { padding: 25px; }
-            .poem-content { font-size: 1.4em; }
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-large,
+            .card-tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            #drawingCanvas {
+                height: 350px;
+            }
+
+            .poem-section {
+                padding: 25px;
+            }
+
+            .poem-content {
+                font-size: 1.4em;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="spring-particles" id="springParticles"></div>
 
@@ -365,25 +428,31 @@
 
         <div class="content-grid">
             <div class="content-card card-large">
-                <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80" alt="Hoa đào mùa xuân" class="card-image">
+                <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80"
+                    alt="Hoa đào mùa xuân" class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>🌡️ Thời tiết & Khí hậu</h2>
-                    <p>Mùa xuân Việt Nam có khí hậu ấm áp, dễ chịu với nhiệt độ dao động từ 20-25°C. Không khí trong lành, mát mẻ sau những ngày đông lạnh giá. Thường có mưa phùn nhẹ, tạo nên không khí ẩm ướt đặc trưng.</p>
+                    <p>Mùa xuân Việt Nam có khí hậu ấm áp, dễ chịu với nhiệt độ dao động từ 20-25°C. Không khí trong
+                        lành, mát mẻ sau những ngày đông lạnh giá. Thường có mưa phùn nhẹ, tạo nên không khí ẩm ướt đặc
+                        trưng.</p>
                 </div>
             </div>
 
             <div class="content-card">
-                <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80" alt="Cảnh đồng lúa xanh" class="card-image">
+                <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80"
+                    alt="Cảnh đồng lúa xanh" class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>🌳 Cảnh quan</h2>
-                    <p>Hoa đào, hoa mai nở rộ khắp nơi. Lúa non xanh mướt trên đồng ruộng. Bầu trời trong xanh, nắng nhẹ nhàng.</p>
+                    <p>Hoa đào, hoa mai nở rộ khắp nơi. Lúa non xanh mướt trên đồng ruộng. Bầu trời trong xanh, nắng nhẹ
+                        nhàng.</p>
                 </div>
             </div>
 
             <div class="content-card">
-                <img src="https://images.unsplash.com/photo-1617088746317-246973c85d8e?w=800&q=80" alt="Áo dài truyền thống" class="card-image">
+                <img src="https://images.unsplash.com/photo-1617088746317-246973c85d8e?w=800&q=80"
+                    alt="Áo dài truyền thống" class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>👘 Trang phục</h2>
@@ -392,7 +461,8 @@
             </div>
 
             <div class="content-card card-tall">
-                <img src="https://images.unsplash.com/photo-1548041347-390744827ff0?w=800&q=80" alt="Tết Nguyên Đán" class="card-image">
+                <img src="https://images.unsplash.com/photo-1548041347-390744827ff0?w=800&q=80" alt="Tết Nguyên Đán"
+                    class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>🎊 Lễ hội & Hoạt động</h2>
@@ -401,12 +471,14 @@
                         <span class="festival-tag">Lễ hội Hoa</span>
                         <span class="festival-tag">Hội Lim</span>
                     </p>
-                    <p>Thăm chùa đầu năm để cầu bình an, may mắn. Xông đất để mong năm mới thuận lợi. Mừng tuổi người lớn tuổi.</p>
+                    <p>Thăm chùa đầu năm để cầu bình an, may mắn. Xông đất để mong năm mới thuận lợi. Mừng tuổi người
+                        lớn tuổi.</p>
                 </div>
             </div>
 
             <div class="content-card">
-                <img src="https://images.unsplash.com/photo-1496412705862-e0088f16f791?w=800&q=80" alt="Bánh chưng" class="card-image">
+                <img src="https://images.unsplash.com/photo-1496412705862-e0088f16f791?w=800&q=80" alt="Bánh chưng"
+                    class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>🍜 Ẩm thực</h2>
@@ -415,7 +487,8 @@
             </div>
 
             <div class="content-card card-large">
-                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80" alt="Gia đình sum vầy" class="card-image">
+                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80"
+                    alt="Gia đình sum vầy" class="card-image">
                 <div class="image-overlay"></div>
                 <div class="card-content">
                     <h2>💝 Cảm xúc cá nhân</h2>
@@ -435,9 +508,9 @@
                 <h2>🎨 Vẽ Mùa Xuân Của Bạn</h2>
                 <p style="color: #6b7280; font-size: 1.1em;">Vẽ và để AI (Google Gemini) nhận xét bức tranh của bạn</p>
             </div>
-            
+
             <canvas id="drawingCanvas"></canvas>
-            
+
             <div class="controls">
                 <button class="btn btn-spring" onclick="drawSpringAI()">🌸 AI Vẽ Mùa Xuân</button>
                 <button class="btn btn-spring" onclick="drawFlowers()">🌺 Vẽ Hoa Đào</button>
@@ -445,16 +518,16 @@
                 <button class="btn btn-secondary" onclick="analyzeDrawing()">🤖 Gemini Phân Tích</button>
                 <button class="btn btn-danger" onclick="clearCanvas()">🗑️ Xóa</button>
             </div>
-            
+
             <div id="aiResponse"></div>
         </div>
     </div>
 
-        <script>
+    <script>
         // Spring particles animation
         const springParticles = document.getElementById('springParticles');
         const flowers = ['🌸', '🌺', '🌼', '🌻', '💮', '🏵️', '🌷'];
-        
+
         for (let i = 0; i < 20; i++) {
             const particle = document.createElement('div');
             particle.className = 'spring-particle';
@@ -469,7 +542,7 @@
         // Canvas setup
         const canvas = document.getElementById('drawingCanvas');
         const ctx = canvas.getContext('2d');
-        
+
         function resizeCanvas() {
             canvas.width = canvas.offsetWidth;
             canvas.height = canvas.offsetHeight;
@@ -536,36 +609,36 @@
                 const x = Math.random() * canvas.width;
                 const y = Math.random() * canvas.height / 2;
                 const size = Math.random() * 20 + 10;
-                
+
                 ctx.fillStyle = `rgba(255, 182, 193, ${Math.random() * 0.4 + 0.6})`;
                 for (let j = 0; j < 5; j++) {
                     ctx.beginPath();
                     const angle = (j * 72) * Math.PI / 180;
                     ctx.ellipse(
-                        x + Math.cos(angle) * size/2,
-                        y + Math.sin(angle) * size/2,
-                        size/2, size/3, angle, 0, Math.PI * 2
+                        x + Math.cos(angle) * size / 2,
+                        y + Math.sin(angle) * size / 2,
+                        size / 2, size / 3, angle, 0, Math.PI * 2
                     );
                     ctx.fill();
                 }
-                
+
                 ctx.fillStyle = '#fbbf24';
                 ctx.beginPath();
-                ctx.arc(x, y, size/4, 0, Math.PI * 2);
+                ctx.arc(x, y, size / 4, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
         function drawRiceField() {
-            const gradient = ctx.createLinearGradient(0, canvas.height/2, 0, canvas.height);
+            const gradient = ctx.createLinearGradient(0, canvas.height / 2, 0, canvas.height);
             gradient.addColorStop(0, '#86efac');
             gradient.addColorStop(1, '#22c55e');
             ctx.fillStyle = gradient;
-            ctx.fillRect(0, canvas.height/2, canvas.width, canvas.height/2);
-            
+            ctx.fillRect(0, canvas.height / 2, canvas.width, canvas.height / 2);
+
             for (let i = 0; i < 100; i++) {
                 const x = Math.random() * canvas.width;
-                const y = canvas.height/2 + Math.random() * canvas.height/2;
+                const y = canvas.height / 2 + Math.random() * canvas.height / 2;
                 ctx.strokeStyle = `rgba(34, 197, 94, ${Math.random() * 0.5 + 0.5})`;
                 ctx.lineWidth = 2;
                 ctx.beginPath();
@@ -573,12 +646,12 @@
                 ctx.lineTo(x, y - 20 - Math.random() * 20);
                 ctx.stroke();
             }
-            
-            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height/2);
+
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, canvas.height / 2);
             skyGradient.addColorStop(0, '#dbeafe');
             skyGradient.addColorStop(1, '#bfdbfe');
             ctx.fillStyle = skyGradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height/2);
+            ctx.fillRect(0, 0, canvas.width, canvas.height / 2);
         }
 
         function drawSpringAI() {
@@ -606,7 +679,7 @@
 
             try {
                 const imageData = canvas.toDataURL('image/png');
-                
+
                 const response = await fetch(GROQ_API_URL, {
                     method: 'POST',
                     headers: {
@@ -663,4 +736,5 @@
         }
     </script>
 </body>
+
 </html>
