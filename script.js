@@ -41,7 +41,7 @@ const products = [
             dong: [{ type: 'img', url: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=600' }]
         }
     },
-    { id: 4, name: "Tranh Đông Hồ", material: "Giấy Dó", method: "In khắc gỗ", meaning: "Lưu giữ hồn dân tộc.", versions: { xuan: [{ type: 'img', url: 'MEDIA/tranh0.jpg' }], ha: [], thu: [], dong: [] } },
+    { id: 4, name: "Tranh Đông Hồ", material: "Giấy Dó", method: "In khắc gỗ", meaning: "Lưu giữ hồn dân tộc.", versions: { xuan: [{ type: 'img', url: 'MEDIA/tranhdongho0.jpg' }], ha: [], thu: [], dong: [] } },
     { id: 5, name: "Chuồn Chuồn Tre", material: "Tre tự nhiên", method: "Thủ công", meaning: "Ký ức tuổi thơ.", versions: { xuan: [{ type: 'img', url: 'MEDIA/chuonchuon0.jpg' }], ha: [], thu: [], dong: [] } },
     { id: 6, name: "Quạt Thư Pháp", material: "Giấy, tre", method: "Viết thư pháp", meaning: "Gió mát lành.", versions: { xuan: [{ type: 'img', url: 'MEDIA/quat0.jpg' }], ha: [], thu: [], dong: [] } },
 ];
